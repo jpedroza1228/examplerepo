@@ -1,0 +1,75 @@
+---
+title: "Class Dashboard Example"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(fivethirtyeight)
+library(tidyverse)
+
+bob_data <- fivethirtyeight::bob_ross
+```
+# Page 1 {data-icon="fa-tree"}
+
+Sidebar Title {.sidebar}
+============
+Your text here. You can use markdown syntax, including 
+[links](http://blah.com), *italics*, **bolding**, etc.
+
+If you have multiple pages then you will changes `-` to `=`
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+ggplot(bob_data, aes(guest)) +
+  geom_bar(color = "white", fill = "brown") +
+  theme_minimal()
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+bob_data %>% 
+  group_by(season)
+ggplot(bob_data, aes(lake)) +
+  geom_bar(color = "white", fill = "brown")
+```
+
+### Chart C
+
+```{r}
+ggplot(bob_data, aes(episode_num, boat)) +
+  geom_point(color = "brown")
+```
+
+# Page 2
+
+Column {data-width=150}
+-----------------------
+
+### Chart A
+
+```{r}
+table(bob_data$clouds)
+```
+
+Column {data-width=600}
+-----------------------
+
+### Chart B
+
+```{r}
+ggplot(bob_data, aes(cliff)) +
+  geom_bar(fill = "red")
+```
+
